@@ -49,7 +49,7 @@ async def make_request(session: aiohttp.ClientSession, url: str, username: str, 
         async with session.post(url, headers=headers, data=data) as response:
             if response.status == 429:
                 if attempt < 3:
-                    await asyncio.sleep(random.uniform(1, 3))
+                    await asyncio.sleep(random.uniform(0.1, 0.5)) 
                     return await make_request(session, url, username, attempt + 1)
                 return {"error": "Rate limited", "username": username}
             
